@@ -8,13 +8,15 @@ import shutil
 import subprocess
 import sys
 
+GIT_DEPS = [
+    "https://github.com/Project-Genoa/frida-java-bridge.git"
+]
 
 RELAXED_DEPS = {
     "frida-compile": "^10.2.5",
 }
 
 EXACT_DEPS = {
-    "frida-java-bridge": "6.3.6",
     "frida-objc-bridge": "7.0.6",
     "frida-swift-bridge": "2.0.8"
 }
@@ -45,6 +47,10 @@ def generate_runtime(output_dir, priv_dir, input_dir, gum_dir, capstone_incdir, 
         (priv_dir / "tsconfig.json").write_text("{ \"files\": [], \"compilerOptions\": { \"typeRoots\": [] } }", encoding="utf-8")
 
         subprocess.run([npm, "init", "-y"],
+                       capture_output=True,
+                       cwd=priv_dir,
+                       check=True)
+        subprocess.run([npm, "install"] + [url for url in GIT_DEPS],
                        capture_output=True,
                        cwd=priv_dir,
                        check=True)
