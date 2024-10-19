@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 GIT_DEPS = [
-    "https://github.com/Project-Genoa/frida-java-bridge.git"
+    "https://github.com/Bluebotlabz/frida-java-bridge.git"
 ]
 
 RELAXED_DEPS = {
